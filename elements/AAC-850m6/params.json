@@ -1,0 +1,137 @@
+{
+    "add_hover_pressed": true,
+    "add_is_visible": true,
+    "autobinding_value": "text",
+    "category": "input forms",
+    "default_dim": {
+        "height": 200,
+        "width": 400
+    },
+    "display": "Rich Text Input",
+    "events": {
+        "AAf": {
+            "caption": "value changes",
+            "name": "value_changes"
+        }
+    },
+    "fields": {
+        "AAD": {
+            "caption": "Initial Content",
+            "doc": "The initial content will be ignored if auto-binding is enabled.",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "initial_content",
+            "optional": true,
+            "rank": 1,
+            "value": "text"
+        },
+        "AAZ": {
+            "caption": "Regular or Tooltip?",
+            "default_val": "Regular",
+            "doc": "",
+            "editor": "Dropdown",
+            "in_style": true,
+            "name": "theme",
+            "options": "Regular,Tooltip",
+            "rank": 3
+        },
+        "AAa": {
+            "caption": "Style Complexity",
+            "default_val": "Full",
+            "doc": "",
+            "editor": "Dropdown",
+            "in_style": true,
+            "name": "complexity",
+            "options": "Basic,Medium,Full",
+            "rank": 4
+        },
+        "AAb": {
+            "caption": "Extend to fit",
+            "default_val": false,
+            "doc": "",
+            "editor": "Checkbox",
+            "in_style": true,
+            "name": "overflow",
+            "options": "Scroll,Extend to fit",
+            "rank": 5
+        },
+        "AAc": {
+            "caption": "Placeholder",
+            "doc": "",
+            "editor": "DynamicValue",
+            "name": "placeholder",
+            "optional": true,
+            "rank": 0,
+            "value": "text"
+        },
+        "AAd": {
+            "caption": "This input shouldn't be empty",
+            "default_val": false,
+            "editor": "Checkbox",
+            "name": "empty",
+            "rank": 7
+        },
+        "AAe": {
+            "caption": "This input is disabled ",
+            "default_val": false,
+            "editor": "Checkbox",
+            "name": "disabled",
+            "rank": 8
+        },
+        "ABI": {
+            "caption": "Link  input placeholder",
+            "default_val": "https://bubble.io/",
+            "editor": "DynamicValue",
+            "name": "link_placeholder",
+            "optional": true,
+            "rank": 2,
+            "value": "text"
+        },
+        "ABJ": {
+            "caption": "Enable autosave",
+            "default_val": true,
+            "doc": "Enabling autosave updates the editor's value state every few seconds. Otherwise, the value will update when you click out of the element.",
+            "editor": "Checkbox",
+            "name": "autosave",
+            "rank": 6
+        }
+    },
+    "has_reset_fn": true,
+    "icon": "ion-android-list",
+    "property_applications": {
+        "Background": true,
+        "Border": true,
+        "BoxShadow": true,
+        "Font": false,
+        "MinWidth": true,
+        "Padding": true,
+        "resizable": true
+    },
+    "states": {
+        "AAE": {
+            "caption": "value",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\treturn properties.initial_content || ''; \n    \n}"
+            },
+            "name": "value",
+            "value": "text"
+        },
+        "AAg": {
+            "caption": "value is valid",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\treturn properties.empty === true && !properties.initial_content;\n\n}"
+            },
+            "name": "value_is_valid",
+            "value": "boolean"
+        },
+        "AAx": {
+            "caption": "field is focused",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\treturn false;\n\n}"
+            },
+            "name": "field_is_focused",
+            "value": "boolean"
+        }
+    },
+    "support_autobinding": true
+}
