@@ -597,7 +597,15 @@ var update = function(instance, properties, context) {
     $('.ql-formats').on('click', () => {
       $(`#${instance.data.id}`).children().eq(3).hide();
     });
-
+      
+    //positions the image resize module correctly when scrolling
+    $(quill.root).on('scroll', () => {
+       var resize_obj = $(`#${instance.data.id}`).children()[3];
+       if (resize_obj && !resize_obj.hidden){
+      	  quill.theme.modules.imageResize.repositionElements();
+       }
+    });
+      
     quill = instance.data.quill;
 
     //handles text changes and blur events
