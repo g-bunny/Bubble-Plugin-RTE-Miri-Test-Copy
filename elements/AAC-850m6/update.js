@@ -559,7 +559,6 @@ var update = function(instance, properties, context) {
     //loads initial content if initial content property is set - handles height change if expected behavior is for element to extend if there is overflow
     if (!instance.data.initial_content_loaded) {
       quill = instance.data.quill;
-      var pastedIntoHTML = false
       if (properties.initial_content) {
         // paste the HTML even if current_bbcode matches initial content, 
         // to mitigate wrong initial content from persisting in editor if the data the RTE is autobinding to changes
@@ -575,7 +574,6 @@ var update = function(instance, properties, context) {
           quill.setSelection(current_selection)
           // prevent paste-induced focus from autoscrolling to this position
           window.scrollTo(scrollLeft, scrollTop)
-          pastedIntoHTML = true;
 
         if(properties.overflow && !properties.initial_content.includes('[/img]')){
           instance.setHeight(calculateHeight(quill,instance.data.initial_height, instance.data.toolbar_height));
@@ -603,6 +601,8 @@ var update = function(instance, properties, context) {
       $(`#${instance.data.id}`).children().eq(3).hide();
     });
       
+    quill = instance.data.quill;
+      
     //positions the image resize module correctly when scrolling
     $(quill.root).on('scroll', () => {
       var resize_obj = $(`#${instance.data.id}`).children()[3];
@@ -611,8 +611,6 @@ var update = function(instance, properties, context) {
       }
     });
       
-    quill = instance.data.quill;
-
     //handles text changes and blur events
     var set_val = () => {
       $.when(htmlToBBCode(quill.root.innerHTML)).done((html_to_bbcode) => {
