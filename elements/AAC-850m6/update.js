@@ -611,6 +611,13 @@ var update = function(instance, properties, context) {
       }
     });
       
+    //if image is resized, updates the value right away instead of waiting for the doneTypingInterval timer  
+    $(`#${instance.data.id}`).mouseup(function(){
+      if ($($(`#${instance.data.id}`).children()[3]).children().length > 0){
+        doneTyping();
+      }
+    });
+
     //handles text changes and blur events
     var set_val = () => {
       $.when(htmlToBBCode(quill.root.innerHTML)).done((html_to_bbcode) => {
