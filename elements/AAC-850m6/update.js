@@ -612,8 +612,8 @@ var update = function(instance, properties, context) {
     });
       
     //if image is resized, updates the value right away instead of waiting for the doneTypingInterval timer  
-    $(`#${instance.data.id}`).mouseup(function(){
-      if ($($(`#${instance.data.id}`).children()[3]).children().length > 0){
+    $(`#${instance.data.id}`).mouseup(() => {
+      if ($(`#${instance.data.id}`).children()[3]){
         doneTyping();
       }
     });
