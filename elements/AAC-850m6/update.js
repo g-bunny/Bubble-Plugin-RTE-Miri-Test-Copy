@@ -560,7 +560,8 @@ var update = function(instance, properties, context) {
     if (!instance.data.initial_content_loaded) {
       quill = instance.data.quill;
       if (properties.initial_content) {
-        if (instance.data.current_bbcode !== properties.initial_content) {
+        // paste the HTML even if current_bbcode matches initial content, 
+        // to mitigate wrong initial content from persisting in editor if the data the RTE is autobinding to changes
           var initial_html = bbCodeToHTML(properties.initial_content);
           var current_selection = quill.getSelection()
           var scrollTop = window.scrollY
@@ -573,15 +574,17 @@ var update = function(instance, properties, context) {
           quill.setSelection(current_selection)
           // prevent paste-induced focus from autoscrolling to this position
           window.scrollTo(scrollLeft, scrollTop)
-        }
+
         if(properties.overflow && !properties.initial_content.includes('[/img]')){
           instance.setHeight(calculateHeight(quill,instance.data.initial_height, instance.data.toolbar_height));
         }
+
         $(quill.root).find('img').load(() => {
           if (properties.overflow){
             instance.setHeight(calculateHeight(quill,instance.data.initial_height, instance.data.toolbar_height));
           }
         });
+
       } else {
         $(quill.root).html("");
       }
@@ -598,16 +601,16 @@ var update = function(instance, properties, context) {
       $(`#${instance.data.id}`).children().eq(3).hide();
     });
       
+    quill = instance.data.quill;
+      
     //positions the image resize module correctly when scrolling
     $(quill.root).on('scroll', () => {
-       var resize_obj = $(`#${instance.data.id}`).children()[3];
-       if (resize_obj && !resize_obj.hidden){
-      	  quill.theme.modules.imageResize.repositionElements();
-       }
+      var resize_obj = $(`#${instance.data.id}`).children()[3];
+      if (resize_obj && !resize_obj.hidden){
+        quill.theme.modules.imageResize.repositionElements();
+      }
     });
       
-    quill = instance.data.quill;
-
     //handles text changes and blur events
     var set_val = () => {
       $.when(htmlToBBCode(quill.root.innerHTML)).done((html_to_bbcode) => {
