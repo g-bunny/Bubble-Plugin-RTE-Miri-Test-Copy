@@ -175,6 +175,7 @@ var update = function(instance, properties, context) {
     bbcode = bbcode.replace(/\[\/right\]/gi, "[/right]");
     bbcode = bbcode.replace(/\[\/justify\]/gi, "[/justify]");
 
+  // TODO: for all lines containing (.*?), use '/gmis' instead of '/gmi'
     bbcode = bbcode.replace(/\[center\](.*?)\[\/center\]/gmi, function(x){
       x = x.replace(/\[center\](.*?)\[\/center\]/gmi, "$1");
       x = x.replace(/\[h1\]/gmi, "[center][h1]");
