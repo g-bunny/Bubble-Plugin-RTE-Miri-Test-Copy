@@ -268,7 +268,7 @@ var update = function(instance, properties, context) {
     bbcode = bbcode.replace(/\[blockquote\]\[indent data=(.*?)\]/gmi, '<blockquote class="ql-indent-$1">');
 
     bbcode = bbcode.replace(/\[(center|right|justify)\]\[indent data=(.*?)\](.*?)\[\/indent\]\[\/(center|right|justify)\]/gmi, '<p class="ql-align-$1 ql-indent-$2">$3</p>');
-    bbcode = bbcode.replace(/\[(center|right|justify)\](.*?)\[\/(center|right|justify)\]/gmi, '<p class="ql-align-$1">$2</p>');
+    bbcode = bbcode.replace(/\[(center|right|justify)\](.*?)\[\/\1\]/gmis, '<p class="ql-align-$1">$2</p>');
     bbcode = bbcode.replace(/\[indent data=(.*?)\](.*?)\[\/indent\]/gmi, '<p class="ql-indent-$1">$2</p>');
 
     bbcode = bbcode.replace(/\[b\]/gi, "<strong>");
